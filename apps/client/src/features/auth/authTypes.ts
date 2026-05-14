@@ -8,4 +8,5 @@ export type AuthState = {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isHydrated: boolean;
 };

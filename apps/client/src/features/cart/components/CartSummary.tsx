@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { selectCartSubtotal } from "../cartSelectors";
 
 import { useAppSelector } from "@/store/hooks";
@@ -33,9 +34,15 @@ export default function CartSummary() {
         </div>
       </div>
 
-      <button className="mt-6 w-full rounded-xl bg-black py-4 text-white">
+      {/* <button className="mt-6 w-full rounded-xl bg-black py-4 text-white">
         Proceed to Checkout
-      </button>
+      </button> */}
+      <Link
+        href="/checkout"
+        className="block text-center mt-6 w-full rounded-xl bg-black py-4 text-white"
+      >
+        Proceed to Checkout
+      </Link>
     </div>
   );
 }

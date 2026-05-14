@@ -68,9 +68,16 @@ export default function CartDrawer() {
                 View Cart
               </Link>
 
-              <button className="w-full rounded-xl bg-black py-4 text-white">
+              {/* <button className="w-full rounded-xl bg-black py-4 text-white">
                 Checkout
-              </button>
+              </button> */}
+              <Link
+                href="/checkout"
+                onClick={() => dispatch(closeCart())}
+                className="block text-center w-full rounded-xl bg-black py-4 text-white"
+              >
+                Checkout
+              </Link>
             </div>
           </div>
         )}

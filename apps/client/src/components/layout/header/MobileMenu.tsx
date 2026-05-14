@@ -6,6 +6,11 @@ import { navigationLinks } from "@/constants/navigation";
 import { openCart } from "@/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { selectCartQuantity } from "@/features/cart/cartSelectors";
+import { logout } from "@/features/auth/authSlice";
+import {
+  selectIsAuthenticated,
+  selectUser,
+} from "@/features/auth/authSelectors";
 
 type MobileMenuProps = {
   isOpen: boolean;
@@ -15,6 +20,8 @@ type MobileMenuProps = {
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const dispatch = useAppDispatch();
   const cartQuantity = useAppSelector(selectCartQuantity);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const user = useAppSelector(selectUser);
 
   return (
     <>
@@ -56,11 +63,37 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* ACTIONS */}
         <div className="mt-10 flex flex-col gap-4">
-          <Button variant="secondary">Login</Button>
+          {/* AUTH */}
+          {isAuthenticated && user ? (
+            <div className="rounded-2xl border p-4">
+              <p className="text-sm text-gray-500">Signed in as</p>
 
+              <p className="mt-1 font-medium">{user.name}</p>
+
+              <button
+                onClick={() => {
+                  dispatch(logout());
+
+                  onClose();
+                }}
+                className="mt-4 text-sm font-medium transition hover:text-gray-500"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link href="/login" onClick={onClose}>
+              <Button variant="secondary" className="w-full">
+                Login
+              </Button>
+            </Link>
+          )}
+
+          {/* CART */}
           <Button
             onClick={() => {
               onClose();
+
               dispatch(openCart());
             }}
             className="flex items-center justify-center gap-2"
