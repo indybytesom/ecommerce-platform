@@ -1,0 +1,52 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
+
+const links = [
+  {
+    label: "Dashboard",
+    href: "/dashboard",
+  },
+
+  {
+    label: "Orders",
+    href: "/orders",
+  },
+
+  {
+    label: "Shop",
+    href: "/shop",
+  },
+];
+
+export default function AccountSidebar() {
+  const pathname = usePathname();
+
+  return (
+    <aside className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+      <h2 className="mb-6 text-lg font-semibold">My Account</h2>
+
+      <nav className="space-y-2">
+        {links.map((link) => {
+          const isActive = pathname === link.href;
+
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={clsx(
+                "block rounded-xl px-4 py-3 text-sm font-medium transition",
+                isActive
+                  ? "bg-black text-white"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-black",
+              )}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </aside>
+  );
+}

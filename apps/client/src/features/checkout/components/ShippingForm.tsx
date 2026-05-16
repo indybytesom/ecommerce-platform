@@ -123,7 +123,7 @@ export default function ShippingForm() {
             <input
               {...register("city")}
               placeholder="New York"
-              className="w-full rounded-xl border px-4 py-3 outline-none transition focus:border-black"
+              className="w-full rounded-xl border bg-white px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-black focus:ring-2 focus:ring-black/5"
             />
 
             {errors.city && (

@@ -1,34 +1,34 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState, User } from "./authTypes";
-import {
-  getUserFromStorage,
-  removeUserFromStorage,
-  saveUserToStorage,
-} from "./authUtils";
+import { loadAuthState } from "@/store/persistence";
+import { toast } from "sonner";
 
-const storedUser = typeof window !== "undefined" ? getUserFromStorage() : null;
+const persistedAuth = loadAuthState();
 
-const initialState: AuthState = {
-  user: storedUser,
-  isAuthenticated: !!storedUser,
-  isLoading: false,
-  isHydrated: true,
-};
+const initialState: AuthState =
+  persistedAuth || {
+    user: null,
+    isAuthenticated: false,
+    isLoading: false,
+    isHydrated: true,
+  };
 
 const authSlice = createSlice({
   name: "auth",
+
   initialState,
+
   reducers: {
     login: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isAuthenticated = true;
-      saveUserToStorage(action.payload);
+      toast.success("Logged in successfully");
     },
 
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
-      removeUserFromStorage();
+      toast.success("Logged out successfully");
     },
   },
 });

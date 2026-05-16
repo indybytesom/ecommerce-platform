@@ -4,6 +4,8 @@ import ProductFilters from "@/components/product/shop/ProductFilters";
 import SortDropdown from "@/components/product/shop/SortDropdown";
 import ProductGrid from "@/components/product/shop/ProductGrid";
 import MobileShopActions from "@/components/product/shop/MobileShopActions";
+import { getProducts } from "@/features/products/productQueries";
+import { filterProducts } from "@/features/products/productUtils";
 
 export default async function ShopPage({
   searchParams,
@@ -17,6 +19,17 @@ export default async function ShopPage({
   }>;
 }) {
   const params = await searchParams;
+  const products = getProducts();
+
+  const filteredProducts = filterProducts({
+    products,
+    category: params.category,
+    sort: params.sort,
+    size: params.size,
+    availability: params.availability,
+    price: params.price,
+  });
+
   return (
     <main className="py-16 lg:py-24">
       <Container>
@@ -37,7 +50,10 @@ export default async function ShopPage({
 
             {/* DESKTOP TOP BAR */}
             <div className="hidden items-center justify-between lg:flex">
-              <p className="text-sm text-gray-500">Showing 12 products</p>
+              <p className="text-sm text-gray-500">
+                Showing {filteredProducts.length} product
+                {filteredProducts.length !== 1 && "s"}
+              </p>
 
               <SortDropdown />
             </div>

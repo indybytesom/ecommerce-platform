@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 import { CartItem, CartState } from "./cartTypes";
 import { findCartItemIndex } from "./cartUtils";
+import { loadCartState } from "@/store/persistence";
 
-const initialState: CartState = {
+const persistedCart = loadCartState();
+const initialState: CartState = persistedCart || {
   items: [],
   isCartOpen: false,
 };

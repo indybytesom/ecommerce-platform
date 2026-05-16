@@ -1,6 +1,6 @@
 import Container from "@/components/ui/Container";
 import ProductCard from "./ProductCard";
-import { getFeaturedProducts } from "@/features/products/productUtils";
+import { getFeaturedProducts } from "@/features/products/productQueries";
 
 export default function FeaturedProducts() {
   const featuredProducts = getFeaturedProducts();

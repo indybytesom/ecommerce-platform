@@ -28,6 +28,7 @@ import {
   selectCartItems,
   selectCartSubtotal,
 } from "@/features/cart/cartSelectors";
+import { toast } from "sonner";
 
 export default function PaymentForm() {
   const dispatch = useAppDispatch();
@@ -98,6 +99,7 @@ export default function PaymentForm() {
     };
 
     dispatch(createOrder(order));
+    toast.success("Order placed successfully");
     await new Promise((resolve) => setTimeout(resolve, 2000));
     dispatch(clearCart());
     dispatch(resetCheckout());

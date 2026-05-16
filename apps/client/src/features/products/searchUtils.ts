@@ -1,10 +1,11 @@
-import { products } from "@/data/products";
+import { getProducts } from "./productQueries";
 
 export const searchProducts = (query: string) => {
   if (!query.trim()) {
     return [];
   }
 
+  const products = getProducts();
   const normalizedQuery = query.toLowerCase();
 
   return products.filter((product) => {

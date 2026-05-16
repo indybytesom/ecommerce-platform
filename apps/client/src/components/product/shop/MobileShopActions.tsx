@@ -1,11 +1,15 @@
 "use client";
-
 import { useState } from "react";
-
 import MobileFilters from "./MobileFilters";
+import { useProductFilters } from "@/features/products/useProductFilters";
 
 export default function MobileShopActions() {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const { searchParams, updateFilter } = useProductFilters();
+
+  const handleSortChange = (value: string) => {
+    updateFilter("sort", value === "default" ? "" : value);
+  };
 
   return (
     <>
@@ -22,12 +26,15 @@ export default function MobileShopActions() {
           Filters
         </button>
 
-        <select className="rounded-xl border border-gray-300 px-4 py-3 text-sm">
-          <option>Latest</option>
-
-          <option>Price: Low to High</option>
-
-          <option>Price: High to Low</option>
+        <select
+          value={searchParams.get("sort") || "default"}
+          onChange={(e) => handleSortChange(e.target.value)}
+          className="rounded-xl border border-gray-300 px-4 py-3 text-sm"
+        >
+          <option value="default">Featured</option>
+          <option value="latest">Latest</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
         </select>
       </div>
     </>

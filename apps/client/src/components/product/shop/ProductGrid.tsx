@@ -1,5 +1,8 @@
+"use client";
+import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
-import { products } from "@/data/products";
+import { getProducts } from "@/features/products/productQueries";
+import { filterProducts } from "@/features/products/productUtils";
 
 type ProductGridProps = {
   category?: string;
@@ -16,33 +19,26 @@ export default function ProductGrid({
   availability,
   price,
 }: ProductGridProps) {
-  const filteredProducts = [...products]
-    .filter((product) => {
-      const matchesCategory = !category || product.category === category;
+  const products = getProducts();
+  const filteredProducts = filterProducts({
+    products,
+    category,
+    sort,
+    size,
+    availability,
+    price,
+  });
 
-      const matchesSize = !size || product.sizes?.includes(size);
-
-      const matchesAvailability =
-        !availability ||
-        (availability === "In Stock" ? product.inStock : !product.inStock);
-
-      const matchesPrice = !price || product.price <= Number(price);
-
-      return (
-        matchesCategory && matchesSize && matchesAvailability && matchesPrice
-      );
-    })
-    .sort((a, b) => {
-      if (sort === "price-low") {
-        return a.price - b.price;
-      }
-
-      if (sort === "price-high") {
-        return b.price - a.price;
-      }
-
-      return 0;
-    });
+  if (filteredProducts.length === 0) {
+    return (
+      <EmptyState
+        title="No Products Found"
+        description="Try adjusting your filters or explore other categories to find products."
+        buttonText="Clear Filters"
+        href="/shop"
+      />
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">

@@ -32,18 +32,10 @@
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/store/providers";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Client Application",
@@ -58,7 +50,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-white text-black">
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Toaster position="top-right" richColors closeButton />
+        </Providers>
       </body>
     </html>
   );

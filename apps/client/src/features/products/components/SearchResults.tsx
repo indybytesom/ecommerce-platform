@@ -18,12 +18,18 @@ export default function SearchResults({
   }
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-      {products.map((product) => (
-        <div key={product.id} onClick={onProductClick}>
-          <ProductCard {...product} />
-        </div>
-      ))}
-    </div>
+    <>
+      <p className="mb-6 text-sm text-gray-500">
+        {products.length} result
+        {products.length !== 1 && "s"} found
+      </p>
+      <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        {products.map((product) => (
+          <div key={product.id} onClick={onProductClick}>
+            <ProductCard {...product} />
+          </div>
+        ))}
+      </div>
+    </>
   );
 }

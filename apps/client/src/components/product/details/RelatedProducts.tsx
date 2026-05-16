@@ -1,6 +1,6 @@
 import ProductCard from "@/components/product/ProductCard";
 import Container from "@/components/ui/Container";
-import { getRelatedProducts } from "@/features/products/productUtils";
+import { getRelatedProducts } from "@/features/products/productQueries";
 
 type RelatedProductsProps = {
   category: string;

@@ -1,41 +1,25 @@
 "use client";
 import { Check } from "lucide-react";
-import { products } from "@/data/products";
-import { useRouter, useSearchParams } from "next/navigation";
+import { getProducts } from "@/features/products/productQueries";
+import { useProductFilters } from "@/features/products/useProductFilters";
 
 export default function ProductFilters() {
-  const searchParams = useSearchParams();
+  const { searchParams, updateFilter } = useProductFilters();
+  const products = getProducts();
   // const categories = ["Hoodies", "T-Shirts", "Denim", "Outerwear"];
   const categories = ["Fashion", "Electronics", "Beauty", "Lifestyle"];
   const sizes = ["S", "M", "L", "XL"];
-  const router = useRouter();
   const selectedCategory = searchParams.get("category");
   const selectedSize = searchParams.get("size");
   const selectedAvailability = searchParams.get("availability");
   const selectedPrice = Number(searchParams.get("price") || 500);
 
   const toggleCategory = (category: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (selectedCategory === category) {
-      params.delete("category");
-    } else {
-      params.set("category", category);
-    }
-
-    router.push(`/shop?${params.toString()}`);
+    updateFilter("category", selectedCategory === category ? "" : category);
   };
 
   const toggleAvailability = (item: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (selectedAvailability === item) {
-      params.delete("availability");
-    } else {
-      params.set("availability", item);
-    }
-
-    router.push(`/shop?${params.toString()}`);
+    updateFilter("availability", selectedAvailability === item ? "" : item);
   };
 
   return (
@@ -95,17 +79,9 @@ export default function ProductFilters() {
             return (
               <button
                 key={i}
-                onClick={() => {
-                  const params = new URLSearchParams(searchParams.toString());
-
-                  if (selectedSize === size) {
-                    params.delete("size");
-                  } else {
-                    params.set("size", size);
-                  }
-
-                  router.push(`/shop?${params.toString()}`);
-                }}
+                onClick={() =>
+                  updateFilter("size", selectedSize === size ? "" : size)
+                }
                 className={`flex h-11 w-11 items-center justify-center rounded-xl border text-sm font-medium transition ${
                   active
                     ? "border-black bg-black text-white"
@@ -145,12 +121,7 @@ export default function ProductFilters() {
               min="0"
               max="500"
               value={selectedPrice}
-              onChange={(e) => {
-                const value = e.target.value;
-                const params = new URLSearchParams(searchParams.toString());
-                params.set("price", value);
-                router.push(`/shop?${params.toString()}`);
-              }}
+              onChange={(e) => updateFilter("price", e.target.value)}
               className="absolute left-0 top-1/2 h-1 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black"
             />
           </div>

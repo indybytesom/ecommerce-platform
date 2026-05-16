@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "@/features/cart/cartSlice";
-import { loadCartState, saveCartState } from "./persistence";
 import authReducer from "@/features/auth/authSlice";
 import checkoutReducer from "@/features/checkout/checkoutSlice";
 import ordersReducer from "@/features/orders/ordersSlice";
+import { baseApi } from "@/services/api/baseApi";
 
-const persistedCart = loadCartState();
+import { saveCartState, saveAuthState, saveOrdersState } from "./persistence";
 
 export const store = configureStore({
   reducer: {
@@ -13,18 +13,20 @@ export const store = configureStore({
     auth: authReducer,
     checkout: checkoutReducer,
     orders: ordersReducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
-
-  preloadedState: persistedCart
-    ? {
-        cart: persistedCart,
-      }
-    : undefined,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(baseApi.middleware),
 });
 
 store.subscribe(() => {
   saveCartState(store.getState().cart);
+
+  saveAuthState(store.getState().auth);
+
+  saveOrdersState(store.getState().orders);
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+
 export type AppDispatch = typeof store.dispatch;

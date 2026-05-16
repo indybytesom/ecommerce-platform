@@ -1,11 +1,8 @@
 "use client";
-
-import { useMemo, useState } from "react";
-
 import { Search, X } from "lucide-react";
-
-import { searchProducts } from "../searchUtils";
+import { useEffect, useRef } from "react";
 import SearchResults from "./SearchResults";
+import { useSearch } from "../useSearch";
 
 type SearchDrawerProps = {
   isOpen: boolean;
@@ -13,11 +10,14 @@ type SearchDrawerProps = {
 };
 
 export default function SearchDrawer({ isOpen, onClose }: SearchDrawerProps) {
-  const [query, setQuery] = useState("");
+  const { query, setQuery, results } = useSearch();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const results = useMemo(() => {
-    return searchProducts(query);
-  }, [query]);
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -48,6 +48,7 @@ export default function SearchDrawer({ isOpen, onClose }: SearchDrawerProps) {
                 placeholder="Search products..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                ref={inputRef}
                 className="h-14 w-full outline-none"
               />
             </div>
@@ -64,7 +65,13 @@ export default function SearchDrawer({ isOpen, onClose }: SearchDrawerProps) {
             <SearchResults products={results} onProductClick={onClose} />
           ) : (
             <div className="py-20 text-center text-gray-500">
-              Search for products...
+              <div className="py-20 text-center">
+                <h2 className="text-xl font-semibold">Search Products</h2>
+
+                <p className="mt-2 text-sm text-gray-500">
+                  Find products by name, category, or description.
+                </p>
+              </div>
             </div>
           )}
         </div>

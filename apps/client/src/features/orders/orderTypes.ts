@@ -1,39 +1,33 @@
-import { CartItem } from "@/features/cart/cartTypes";
-
-import {
-  PaymentMethod,
-  ShippingAddress,
-} from "@/features/checkout/checkoutTypes";
+import { CartItem } from "../cart/cartTypes";
 
 export type OrderStatus =
   | "pending"
-  | "paid"
   | "processing"
+  | "paid"
   | "shipped"
-  | "delivered";
+  | "delivered"
+  | "cancelled";
 
-export type Order = {
+export type PaymentMethod = "card" | "cod";
+
+export interface ShippingAddress {
+  fullName: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+
+export interface Order {
   id: string;
-
   items: CartItem[];
-
   shippingAddress: ShippingAddress;
-
   paymentMethod: PaymentMethod;
-
   subtotal: number;
-
   shipping: number;
-
   total: number;
-
-  createdAt: string;
-
   status: OrderStatus;
-};
-
-export type OrdersState = {
-  orders: Order[];
-
-  latestOrder: Order | null;
-};
+  createdAt: string;
+}
