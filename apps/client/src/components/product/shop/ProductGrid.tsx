@@ -1,6 +1,7 @@
 "use client";
 import EmptyState from "@/components/common/EmptyState";
 import ProductCard from "@/components/product/ProductCard";
+import Pagination from "@/components/ui/Pagination";
 import { getProducts } from "@/features/products/productQueries";
 import { filterProducts } from "@/features/products/productUtils";
 
@@ -28,6 +29,8 @@ export default function ProductGrid({
     availability,
     price,
   });
+  const PRODUCTS_PER_PAGE = 8;
+  const visibleProducts = filteredProducts.slice(0, PRODUCTS_PER_PAGE);
 
   if (filteredProducts.length === 0) {
     return (
@@ -41,10 +44,24 @@ export default function ProductGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-      {filteredProducts.map((product) => (
-        <ProductCard key={product.id} {...product} />
-      ))}
-    </div>
+    // <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+    //   {visibleProducts.map((product) => (
+    //     <ProductCard key={product.id} {...product} />
+    //   ))}
+    // </div>
+
+    <>
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        {visibleProducts.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </div>
+
+      <Pagination
+        currentPage={1}
+        totalPages={Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)}
+        onPageChange={() => {}}
+      />
+    </>
   );
 }

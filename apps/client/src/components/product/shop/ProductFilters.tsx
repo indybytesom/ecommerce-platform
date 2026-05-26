@@ -2,17 +2,23 @@
 import { Check } from "lucide-react";
 import { getProducts } from "@/features/products/productQueries";
 import { useProductFilters } from "@/features/products/useProductFilters";
+import {
+  PRODUCT_AVAILABILITY,
+  PRODUCT_CATEGORIES,
+  PRODUCT_SIZES,
+  MAX_PRODUCT_PRICE,
+} from "@/constants/products";
 
 export default function ProductFilters() {
   const { searchParams, updateFilter } = useProductFilters();
   const products = getProducts();
   // const categories = ["Hoodies", "T-Shirts", "Denim", "Outerwear"];
-  const categories = ["Fashion", "Electronics", "Beauty", "Lifestyle"];
-  const sizes = ["S", "M", "L", "XL"];
+  // const categories = ["Fashion", "Electronics", "Beauty", "Lifestyle"];
+  // const sizes = ["S", "M", "L", "XL"];
   const selectedCategory = searchParams.get("category");
   const selectedSize = searchParams.get("size");
   const selectedAvailability = searchParams.get("availability");
-  const selectedPrice = Number(searchParams.get("price") || 500);
+  const selectedPrice = Number(searchParams.get("price") || MAX_PRODUCT_PRICE);
 
   const toggleCategory = (category: string) => {
     updateFilter("category", selectedCategory === category ? "" : category);
@@ -31,7 +37,7 @@ export default function ProductFilters() {
         </h3>
 
         <div className="mt-6 space-y-4">
-          {categories.map((item, index) => {
+          {PRODUCT_CATEGORIES.map((item, index) => {
             const checked = selectedCategory === item;
 
             return (
@@ -73,7 +79,7 @@ export default function ProductFilters() {
         </h3>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          {sizes.map((size, i) => {
+          {PRODUCT_SIZES.map((size, i) => {
             const active = selectedSize === size;
 
             return (
@@ -112,14 +118,14 @@ export default function ProductFilters() {
             <div
               className="absolute left-0 top-0 h-1 rounded-full bg-black"
               style={{
-                width: `${(selectedPrice / 500) * 100}%`,
+                width: `${(selectedPrice / MAX_PRODUCT_PRICE) * 100}%`,
               }}
             />
 
             <input
               type="range"
               min="0"
-              max="500"
+              max={MAX_PRODUCT_PRICE}
               value={selectedPrice}
               onChange={(e) => updateFilter("price", e.target.value)}
               className="absolute left-0 top-1/2 h-1 w-full -translate-y-1/2 cursor-pointer appearance-none bg-transparent [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black"
@@ -135,7 +141,7 @@ export default function ProductFilters() {
         </h3>
 
         <div className="mt-6 space-y-4">
-          {["In Stock", "Out of Stock"].map((item, index) => {
+          {PRODUCT_AVAILABILITY.map((item, index) => {
             const checked = selectedAvailability === item;
 
             return (

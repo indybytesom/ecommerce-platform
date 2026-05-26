@@ -6,6 +6,7 @@ import ProductGrid from "@/components/product/shop/ProductGrid";
 import MobileShopActions from "@/components/product/shop/MobileShopActions";
 import { getProducts } from "@/features/products/productQueries";
 import { filterProducts } from "@/features/products/productUtils";
+import ActiveFilters from "@/components/product/shop/ActiveFilters";
 
 export default async function ShopPage({
   searchParams,
@@ -57,6 +58,8 @@ export default async function ShopPage({
 
               <SortDropdown />
             </div>
+            {/* Active filters */}
+            <ActiveFilters />
 
             <div className="mt-10">
               <ProductGrid

@@ -37,7 +37,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
       {/* DRAWER */}
       <div
-        className={`fixed right-0 top-0 z-50 flex h-full w-[85%] flex-col bg-white p-6 transition-transform duration-300 lg:hidden ${
+        className={`fixed right-0 top-0 z-50 flex h-full w-[82%] max-w-sm flex-col bg-white p-6 transition-transform duration-300 lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -51,7 +51,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
 
         {/* NAVIGATION */}
-        <ul className="mt-8 space-y-6">
+        <ul className="mt-8 space-y-5">
           {navigationLinks.map((item) => (
             <li key={item.href} className="text-lg font-medium">
               <Link href={item.href} onClick={onClose}>
