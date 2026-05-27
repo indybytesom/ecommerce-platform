@@ -1,22 +1,64 @@
-export const footerLinks = [
+export const footerSections = [
   {
-    label: "About",
-    href: "/about",
+    title: "Shop",
+
+    links: [
+      {
+        label: "Shop",
+        href: "/shop",
+      },
+
+      {
+        label: "Collections",
+        href: "/collections",
+      },
+
+      {
+        label: "New Arrivals",
+        href: "/shop",
+      },
+    ],
   },
+
   {
-    label: "Shop",
-    href: "/shop",
+    title: "Account",
+
+    links: [
+      {
+        label: "Dashboard",
+        href: "/dashboard",
+      },
+
+      {
+        label: "Orders",
+        href: "/orders",
+      },
+
+      {
+        label: "Wishlist",
+        href: "/wishlist",
+      },
+    ],
   },
+
   {
-    label: "Collections",
-    href: "/collections",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-  },
-  {
-    label: "Privacy Policy",
-    href: "/privacy-policy",
+    title: "Support",
+
+    links: [
+      {
+        label: "Contact",
+        href: "/contact",
+      },
+
+      {
+        label: "Privacy Policy",
+        href: "/privacy-policy",
+      },
+
+      {
+        label: "Terms & Conditions",
+        href: "/terms",
+      },
+    ],
   },
 ];

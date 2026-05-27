@@ -11,16 +11,20 @@ import { openCart } from "@/features/cart/cartSlice";
 import { selectCartQuantity } from "@/features/cart/cartSelectors";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import SearchDrawer from "@/features/products/components/SearchDrawer";
+import Link from "next/link";
+import { selectWishlistCount } from "@/features/wishlist/wishlistSelectors";
+import { Heart } from "lucide-react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
   const cartQuantity = useAppSelector(selectCartQuantity);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const wishlistCount = useAppSelector(selectWishlistCount);
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/80 backdrop-blur-xl">
         <Container>
           <div className="flex h-20 items-center justify-between">
             <Logo />
@@ -35,6 +39,19 @@ export default function Header() {
               <button onClick={() => setIsSearchOpen(true)}>
                 <Search size={24} />
               </button>
+
+              <Link
+                href="/wishlist"
+                className="relative transition hover:text-gray-500"
+              >
+                <Heart size={21} />
+
+                {wishlistCount > 0 && (
+                  <span className="absolute -right-2 -top-2 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-black px-1 text-xs text-white">
+                    {wishlistCount}
+                  </span>
+                )}
+              </Link>
 
               {/* CART */}
               <button onClick={() => dispatch(openCart())} className="relative">

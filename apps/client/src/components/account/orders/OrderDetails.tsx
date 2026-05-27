@@ -13,7 +13,7 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
     <div>
       <Link
         href="/orders"
-        className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-black"
+        className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 transition hover:text-black"
       >
         <ArrowLeft size={16} />
         Back to Orders

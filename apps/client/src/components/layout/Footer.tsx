@@ -2,17 +2,26 @@ import Container from "@/components/ui/Container";
 import FooterBrand from "./footer/FooterBrand";
 import FooterLinks from "./footer/FooterLinks";
 import FooterBottom from "./footer/FooterBottom";
+import FooterTop from "./footer/FooterTop";
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-gray-50 py-16">
+    <footer className="border-t border-gray-200 bg-gray-50/80 backdrop-blur">
       <Container>
-        <div className="grid gap-12 md:grid-cols-[1fr_auto]">
+        {/* NEWSLETTER */}
+        <div className="py-16">
+          <FooterTop />
+        </div>
+
+        {/* MAIN FOOTER */}
+        <div className="grid gap-16 py-16 lg:grid-cols-[1.2fr_1fr]">
           <FooterBrand />
+
           <FooterLinks />
         </div>
 
-        <div className="mt-12">
+        {/* BOTTOM */}
+        <div className="pb-10">
           <FooterBottom />
         </div>
       </Container>

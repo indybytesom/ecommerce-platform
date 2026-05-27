@@ -1,11 +1,13 @@
 import { CartState } from "@/features/cart/cartTypes";
 import { AuthState } from "@/features/auth/authTypes";
 import { OrdersState } from "@/features/orders/ordersSlice";
+import { WishlistState } from "@/features/wishlist/wishlistTypes";
 
 const STORAGE_KEYS = {
   CART: "cart",
   AUTH: "auth",
   ORDERS: "orders",
+  WISHLIST: "wishlist",
 };
 
 export const loadState = <T>(key: string): T | undefined => {
@@ -39,6 +41,12 @@ export const saveState = <T>(key: string, state: T) => {
     console.error(`Failed to save ${key}:`, error);
   }
 };
+
+export const loadWishlistState = () =>
+  loadState<WishlistState>(STORAGE_KEYS.WISHLIST);
+
+export const saveWishlistState = (state: WishlistState) =>
+  saveState(STORAGE_KEYS.WISHLIST, state);
 
 export const loadCartState = () => loadState<CartState>(STORAGE_KEYS.CART);
 

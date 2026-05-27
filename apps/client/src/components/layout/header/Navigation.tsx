@@ -13,11 +13,16 @@ export default function Navigation() {
           <li key={item.href}>
             <Link
               href={item.href}
-              className={`transition hover:text-gray-500 ${
-                pathname === item.href ? "text-black" : "text-gray-500"
+              className={`relative pb-1 transition ${
+                pathname === item.href
+                  ? "text-black"
+                  : "text-gray-500 hover:text-black"
               }`}
             >
               {item.label}
+              {pathname === item.href && (
+                <span className="absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-black" />
+              )}
             </Link>
           </li>
         ))}

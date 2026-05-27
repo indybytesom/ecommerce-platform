@@ -1,7 +1,8 @@
 "use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { ShoppingBag, X } from "lucide-react";
-import Link from "next/link";
 import { navigationLinks } from "@/constants/navigation";
 import { openCart } from "@/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -11,6 +12,7 @@ import {
   selectIsAuthenticated,
   selectUser,
 } from "@/features/auth/authSelectors";
+import { accountMenuLinks } from "@/constants/navigation";
 
 type MobileMenuProps = {
   isOpen: boolean;
@@ -19,6 +21,7 @@ type MobileMenuProps = {
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
   const cartQuantity = useAppSelector(selectCartQuantity);
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useAppSelector(selectUser);
@@ -28,7 +31,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {/* OVERLAY */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 z-50 bg-black/50 transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ease-out lg:hidden ${
           isOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -37,7 +40,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
       {/* DRAWER */}
       <div
-        className={`fixed right-0 top-0 z-50 flex h-full w-[82%] max-w-sm flex-col bg-white p-6 transition-transform duration-300 lg:hidden ${
+        className={`fixed right-0 top-0 z-50 flex h-full w-[82%] max-w-sm flex-col bg-white px-5 py-4 transition-transform duration-500 ease-out lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -51,9 +54,16 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
 
         {/* NAVIGATION */}
-        <ul className="mt-8 space-y-5">
+        <ul className="mt-8 flex flex-col gap-2">
           {navigationLinks.map((item) => (
-            <li key={item.href} className="text-lg font-medium">
+            <li
+              key={item.href}
+              className={`rounded-xl px-3 py-3 text-base font-medium transition ${
+                pathname === item.href
+                  ? "bg-black text-white"
+                  : "hover:bg-gray-100"
+              }`}
+            >
               <Link href={item.href} onClick={onClose}>
                 {item.label}
               </Link>
@@ -61,15 +71,35 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           ))}
         </ul>
 
+        {/* ACCOUNT LINKS */}
+        {isAuthenticated && (
+          <div className="mt-8 border-t pt-6">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">
+              Account
+            </p>
+
+            <div className="flex flex-col gap-2">
+              {accountMenuLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className="rounded-xl px-3 py-3 text-base font-medium transition hover:bg-gray-100"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* ACTIONS */}
         <div className="mt-10 flex flex-col gap-4">
           {/* AUTH */}
           {isAuthenticated && user ? (
             <div className="rounded-2xl border p-4">
               <p className="text-sm text-gray-500">Signed in as</p>
-
               <p className="mt-1 font-medium">{user.name}</p>
-
               <button
                 onClick={() => {
                   dispatch(logout());
@@ -96,7 +126,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
               dispatch(openCart());
             }}
-            className="flex items-center justify-center gap-2"
+            className="flex h-12 items-center justify-center gap-2 rounded-2xl"
           >
             <ShoppingBag size={18} />
 
@@ -108,6 +138,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </span>
             )}
           </Button>
+        </div>
+
+        <div className="mt-auto border-t pt-6">
+          <p className="text-xs text-gray-400">Modern ecommerce experience.</p>
         </div>
       </div>
     </>

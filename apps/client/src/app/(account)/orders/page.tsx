@@ -2,7 +2,7 @@ import OrdersList from "@/components/account/orders/OrdersList";
 
 export default function OrdersPage() {
   return (
-    <main className="min-h-screen px-4 py-10 md:px-8">
+    <main className="min-h-screen py-10 md:px-4 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">
