@@ -2,12 +2,16 @@ import { CartState } from "@/features/cart/cartTypes";
 import { AuthState } from "@/features/auth/authTypes";
 import { OrdersState } from "@/features/orders/ordersSlice";
 import { WishlistState } from "@/features/wishlist/wishlistTypes";
+import { RecentlyViewedState } from "@/features/recentlyViewed/recentlyViewedTypes";
+import { ReviewsState } from "@/features/reviews/reviewsTypes";
 
 const STORAGE_KEYS = {
   CART: "cart",
   AUTH: "auth",
   ORDERS: "orders",
   WISHLIST: "wishlist",
+  RECENTLY_VIEWED: "recentlyViewed",
+  REVIEWS: "reviews",
 };
 
 export const loadState = <T>(key: string): T | undefined => {
@@ -63,3 +67,15 @@ export const loadOrdersState = () =>
 
 export const saveOrdersState = (state: OrdersState) =>
   saveState(STORAGE_KEYS.ORDERS, state);
+
+export const loadRecentlyViewedState = () =>
+  loadState<RecentlyViewedState>(STORAGE_KEYS.RECENTLY_VIEWED);
+
+export const saveRecentlyViewedState = (state: RecentlyViewedState) =>
+  saveState(STORAGE_KEYS.RECENTLY_VIEWED, state);
+
+export const loadReviewsState = () =>
+  loadState<ReviewsState>(STORAGE_KEYS.REVIEWS);
+
+export const saveReviewsState = (state: ReviewsState) =>
+  saveState(STORAGE_KEYS.REVIEWS, state);

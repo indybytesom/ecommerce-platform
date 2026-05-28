@@ -41,4 +41,8 @@ export const accountMenuLinks = [
     label: "Wishlist",
     href: "/wishlist",
   },
+  {
+    label: "Shop",
+    href: "/shop",
+  },
 ];

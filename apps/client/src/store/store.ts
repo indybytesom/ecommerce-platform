@@ -5,11 +5,15 @@ import checkoutReducer from "@/features/checkout/checkoutSlice";
 import ordersReducer from "@/features/orders/ordersSlice";
 import { baseApi } from "@/services/api/baseApi";
 import wishlistReducer from "@/features/wishlist/wishlistSlice";
+import recentlyViewedReducer from "@/features/recentlyViewed/recentlyViewedSlice";
+import reviewsReducer from "@/features/reviews/reviewsSlice";
 import {
   saveCartState,
   saveAuthState,
   saveOrdersState,
   saveWishlistState,
+  saveRecentlyViewedState,
+  saveReviewsState,
 } from "./persistence";
 
 export const store = configureStore({
@@ -20,6 +24,8 @@ export const store = configureStore({
     orders: ordersReducer,
     [baseApi.reducerPath]: baseApi.reducer,
     wishlist: wishlistReducer,
+    recentlyViewed: recentlyViewedReducer,
+    reviews: reviewsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
@@ -30,6 +36,8 @@ store.subscribe(() => {
   saveAuthState(store.getState().auth);
   saveOrdersState(store.getState().orders);
   saveWishlistState(store.getState().wishlist);
+  saveRecentlyViewedState(store.getState().recentlyViewed);
+  saveReviewsState(store.getState().reviews);
 });
 
 export type RootState = ReturnType<typeof store.getState>;

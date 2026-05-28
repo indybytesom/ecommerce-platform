@@ -2,23 +2,24 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { accountMenuLinks } from "@/constants/navigation";
 
-const links = [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-  },
+// const links = [
+//   {
+//     label: "Dashboard",
+//     href: "/dashboard",
+//   },
 
-  {
-    label: "Orders",
-    href: "/orders",
-  },
+//   {
+//     label: "Orders",
+//     href: "/orders",
+//   },
 
-  {
-    label: "Shop",
-    href: "/shop",
-  },
-];
+//   {
+//     label: "Shop",
+//     href: "/shop",
+//   },
+// ];
 
 export default function AccountSidebar() {
   const pathname = usePathname();
@@ -28,12 +29,12 @@ export default function AccountSidebar() {
       <h2 className="mb-6 text-lg font-semibold">My Account</h2>
 
       <nav className="space-y-2">
-        {links.map((link) => {
+        {accountMenuLinks.map((link, i) => {
           const isActive = pathname === link.href;
 
           return (
             <Link
-              key={link.href}
+              key={i}
               href={link.href}
               className={clsx(
                 "block rounded-xl px-4 py-3 text-sm font-medium transition",

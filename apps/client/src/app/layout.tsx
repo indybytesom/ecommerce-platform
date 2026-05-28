@@ -36,6 +36,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/store/providers";
 import { Toaster } from "sonner";
+import GlobalUI from "@/components/layout/GlobalUI";
 
 export const metadata: Metadata = {
   title: "Client Application",
@@ -52,6 +53,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white text-black">
         <Providers>
           {children}
+          <GlobalUI />
           <Toaster position="top-right" richColors closeButton />
         </Providers>
       </body>

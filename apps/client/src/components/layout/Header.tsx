@@ -6,21 +6,20 @@ import Logo from "./header/Logo";
 import Navigation from "./header/Navigation";
 import HeaderActions from "./header/HeaderActions";
 import MobileMenu from "./header/MobileMenu";
-import CartDrawer from "@/features/cart/components/CartDrawer";
 import { openCart } from "@/features/cart/cartSlice";
 import { selectCartQuantity } from "@/features/cart/cartSelectors";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import SearchDrawer from "@/features/products/components/SearchDrawer";
 import Link from "next/link";
 import { selectWishlistCount } from "@/features/wishlist/wishlistSelectors";
 import { Heart } from "lucide-react";
+import { useSearch } from "@/hooks/searchContext";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
   const cartQuantity = useAppSelector(selectCartQuantity);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const wishlistCount = useAppSelector(selectWishlistCount);
+  const { openSearch } = useSearch();
 
   return (
     <>
@@ -31,12 +30,12 @@ export default function Header() {
 
             <div className="hidden items-center gap-10 lg:flex">
               <Navigation />
-              <HeaderActions onSearchOpen={() => setIsSearchOpen(true)} />
+              <HeaderActions onSearchOpen={() => openSearch} />
             </div>
 
             <div className="flex items-center gap-4 lg:hidden">
               {/* SEARCH */}
-              <button onClick={() => setIsSearchOpen(true)}>
+              <button onClick={() => openSearch}>
                 <Search size={24} />
               </button>
 
@@ -76,13 +75,6 @@ export default function Header() {
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
-      />
-
-      <CartDrawer />
-
-      <SearchDrawer
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
       />
     </>
   );

@@ -4,6 +4,9 @@ import ProductInfo from "@/components/product/details/ProductInfo";
 import RelatedProducts from "@/components/product/details/RelatedProducts";
 import Container from "@/components/ui/Container";
 import { getProductBySlug } from "@/features/products/productQueries";
+import RecentlyViewedTracker from "@/components/product/details/RecentlyViewedTracker";
+import RecentlyViewed from "@/components/product/details/RecentlyViewed";
+import ProductReviews from "@/components/product/reviews/ProductReviews";
 
 export default async function ProductDetailsPage({
   params,
@@ -20,12 +23,14 @@ export default async function ProductDetailsPage({
   return (
     <main className="py-16 lg:py-24">
       <Container>
-        <div className="grid gap-14 lg:grid-cols-2">
+        {/* <div className="grid gap-14 lg:grid-cols-2"> */}
+        <div className="grid items-start gap-14 lg:grid-cols-2">
           {/* LEFT */}
           <ProductGallery product={product} />
 
           {/* RIGHT */}
           <ProductInfo product={product} />
+          <RecentlyViewedTracker product={product} />
         </div>
       </Container>
 
@@ -33,6 +38,8 @@ export default async function ProductDetailsPage({
         category={product.category}
         currentProductId={product.id}
       />
+      <RecentlyViewed currentProductId={product.id} />
+      <ProductReviews productId={product.id} />
     </main>
   );
 }
