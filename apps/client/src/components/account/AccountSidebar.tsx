@@ -4,23 +4,6 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { accountMenuLinks } from "@/constants/navigation";
 
-// const links = [
-//   {
-//     label: "Dashboard",
-//     href: "/dashboard",
-//   },
-
-//   {
-//     label: "Orders",
-//     href: "/orders",
-//   },
-
-//   {
-//     label: "Shop",
-//     href: "/shop",
-//   },
-// ];
-
 export default function AccountSidebar() {
   const pathname = usePathname();
 

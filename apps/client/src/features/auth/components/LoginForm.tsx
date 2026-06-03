@@ -1,22 +1,14 @@
 "use client";
-
 import Link from "next/link";
-
 import { useRouter } from "next/navigation";
-
 import { useState } from "react";
-
 import { login } from "../authSlice";
-
 import { useAppDispatch } from "@/store/hooks";
 
 export default function LoginForm() {
   const dispatch = useAppDispatch();
-
   const router = useRouter();
-
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {

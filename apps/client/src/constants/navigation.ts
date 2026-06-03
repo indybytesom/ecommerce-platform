@@ -42,6 +42,10 @@ export const accountMenuLinks = [
     href: "/wishlist",
   },
   {
+    label: "Profile",
+    href: "/profile",
+  },
+  {
     label: "Shop",
     href: "/shop",
   },

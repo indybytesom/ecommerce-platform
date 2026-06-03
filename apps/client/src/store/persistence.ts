@@ -4,6 +4,7 @@ import { OrdersState } from "@/features/orders/ordersSlice";
 import { WishlistState } from "@/features/wishlist/wishlistTypes";
 import { RecentlyViewedState } from "@/features/recentlyViewed/recentlyViewedTypes";
 import { ReviewsState } from "@/features/reviews/reviewsTypes";
+import { ProfileState } from "@/features/profile/profileTypes";
 
 const STORAGE_KEYS = {
   CART: "cart",
@@ -12,6 +13,7 @@ const STORAGE_KEYS = {
   WISHLIST: "wishlist",
   RECENTLY_VIEWED: "recentlyViewed",
   REVIEWS: "reviews",
+  PROFILE: "profile",
 };
 
 export const loadState = <T>(key: string): T | undefined => {
@@ -79,3 +81,9 @@ export const loadReviewsState = () =>
 
 export const saveReviewsState = (state: ReviewsState) =>
   saveState(STORAGE_KEYS.REVIEWS, state);
+
+export const loadProfileState = () =>
+  loadState<ProfileState>(STORAGE_KEYS.PROFILE);
+
+export const saveProfileState = (state: ProfileState) =>
+  saveState(STORAGE_KEYS.PROFILE, state);
