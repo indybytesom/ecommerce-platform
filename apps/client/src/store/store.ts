@@ -8,6 +8,7 @@ import wishlistReducer from "@/features/wishlist/wishlistSlice";
 import recentlyViewedReducer from "@/features/recentlyViewed/recentlyViewedSlice";
 import reviewsReducer from "@/features/reviews/reviewsSlice";
 import profileReducer from "@/features/profile/profileSlice";
+import accountSettingsReducer from "@/features/accountSettings/accountSettingsSlice";
 import {
   saveCartState,
   saveAuthState,
@@ -15,7 +16,8 @@ import {
   saveWishlistState,
   saveRecentlyViewedState,
   saveReviewsState,
-  saveProfileState
+  saveProfileState,
+  saveAccountSettingsState,
 } from "./persistence";
 
 export const store = configureStore({
@@ -29,6 +31,7 @@ export const store = configureStore({
     recentlyViewed: recentlyViewedReducer,
     reviews: reviewsReducer,
     profile: profileReducer,
+    accountSettings: accountSettingsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
@@ -42,6 +45,7 @@ store.subscribe(() => {
   saveRecentlyViewedState(store.getState().recentlyViewed);
   saveReviewsState(store.getState().reviews);
   saveProfileState(store.getState().profile);
+  saveAccountSettingsState(store.getState().accountSettings);
 });
 
 export type RootState = ReturnType<typeof store.getState>;

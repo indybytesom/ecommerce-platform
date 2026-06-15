@@ -35,10 +35,22 @@ const ordersSlice = createSlice({
 
       state.latestOrder = null;
     },
+
+    cancelOrder: (state, action: PayloadAction<string>) => {
+      const order = state.orders.find((item) => item.id === action.payload);
+
+      if (order) {
+        order.status = "cancelled";
+
+        if (state.latestOrder && state.latestOrder.id === action.payload) {
+          state.latestOrder.status = "cancelled";
+        }
+      }
+    },
   },
 });
 
-export const { createOrder, clearLatestOrder, clearOrders } =
+export const { createOrder, clearLatestOrder, clearOrders, cancelOrder } =
   ordersSlice.actions;
 
 export default ordersSlice.reducer;

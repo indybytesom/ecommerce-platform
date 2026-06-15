@@ -14,17 +14,25 @@ export default function ProfileCard() {
     "Customer";
 
   const initials = getProfileInitials(
-  profile.firstName,
-  profile.lastName,
-  user?.name,
-);
+    profile.firstName,
+    profile.lastName,
+    user?.name,
+  );
 
   return (
     <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">
       <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-black text-xl font-bold text-white">
-          {initials}
-        </div>
+        {profile.avatar ? (
+          <img
+            src={profile.avatar}
+            alt={fullName}
+            className="h-20 w-20 rounded-full object-cover border border-gray-200"
+          />
+        ) : (
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-black text-xl font-bold text-white">
+            {initials}
+          </div>
+        )}
 
         <div className="flex-1">
           <h2 className="text-2xl font-semibold">{fullName}</h2>

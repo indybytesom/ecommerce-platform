@@ -38,6 +38,10 @@ export const footerSections = [
         label: "Wishlist",
         href: "/wishlist",
       },
+      {
+        label: "Settings",
+        href: "/settings",
+      },
     ],
   },
 

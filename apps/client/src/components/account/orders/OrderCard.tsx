@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Order } from "@/features/orders/orderTypes";
 import Badge from "@/components/ui/Badge";
+import { getStatusVariant } from "@/features/orders/orderUtils";
 
 interface OrderCardProps {
   order: Order;
@@ -21,7 +22,7 @@ export default function OrderCard({ order }: OrderCardProps) {
         </div>
 
         <div className="flex flex-col gap-2 md:items-end">
-          <Badge variant="warning">{order.status}</Badge>
+          <Badge variant={getStatusVariant(order.status)}>{order.status}</Badge>
 
           <p className="text-lg font-semibold">${order.total.toFixed(2)}</p>
 

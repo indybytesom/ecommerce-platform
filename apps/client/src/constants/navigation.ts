@@ -31,12 +31,10 @@ export const accountMenuLinks = [
     label: "Dashboard",
     href: "/dashboard",
   },
-
   {
     label: "Orders",
     href: "/orders",
   },
-
   {
     label: "Wishlist",
     href: "/wishlist",
@@ -44,6 +42,10 @@ export const accountMenuLinks = [
   {
     label: "Profile",
     href: "/profile",
+  },
+  {
+    label: "Settings",
+    href: "/settings",
   },
   {
     label: "Shop",
