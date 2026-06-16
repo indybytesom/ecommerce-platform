@@ -13,6 +13,8 @@ import {
   selectUser,
 } from "@/features/auth/authSelectors";
 import { accountMenuLinks } from "@/constants/navigation";
+import { getFullName } from "@/features/profile/profileUtils";
+import { selectProfile } from "@/features/profile/profileSelectors";
 
 type MobileMenuProps = {
   isOpen: boolean;
@@ -25,6 +27,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const cartQuantity = useAppSelector(selectCartQuantity);
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const user = useAppSelector(selectUser);
+  const profile = useAppSelector(selectProfile);
 
   return (
     <>
@@ -99,7 +102,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           {isAuthenticated && user ? (
             <div className="rounded-2xl border p-4">
               <p className="text-sm text-gray-500">Signed in as</p>
-              <p className="mt-1 font-medium">{user.name}</p>
+              {/* <p className="mt-1 font-medium">{user.name}</p> */}
+              <p className="mt-1 font-medium">
+                {getFullName(profile.firstName, profile.lastName, user?.name)}
+              </p>
               <button
                 onClick={() => {
                   dispatch(logout());

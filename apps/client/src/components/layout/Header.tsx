@@ -30,12 +30,12 @@ export default function Header() {
 
             <div className="hidden items-center gap-10 lg:flex">
               <Navigation />
-              <HeaderActions onSearchOpen={() => openSearch} />
+              <HeaderActions onSearchOpen={openSearch} />
             </div>
 
             <div className="flex items-center gap-4 lg:hidden">
               {/* SEARCH */}
-              <button onClick={() => openSearch}>
+              <button onClick={openSearch}>
                 <Search size={24} />
               </button>
 

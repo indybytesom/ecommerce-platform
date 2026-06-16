@@ -16,8 +16,9 @@ export default function ProfileStats() {
   if (profile.lastName) completedFields++;
   if (profile.phone) completedFields++;
   if (user?.email) completedFields++;
-
-  const completion = Math.round((completedFields / 4) * 100);
+  if (profile.avatar) completedFields++;
+  
+  const completion = Math.round((completedFields / 5) * 100);
 
   return (
     <div className="mb-8 grid gap-4 lg:grid-cols-4">

@@ -2,16 +2,16 @@
 import { useAppSelector } from "@/store/hooks";
 import { selectProfile } from "@/features/profile/profileSelectors";
 import { selectUser } from "@/features/auth/authSelectors";
-import { getProfileInitials } from "@/features/profile/profileUtils";
+import {
+  getFullName,
+  getProfileInitials,
+} from "@/features/profile/profileUtils";
 
 export default function ProfileCard() {
   const profile = useAppSelector(selectProfile);
   const user = useAppSelector(selectUser);
 
-  const fullName =
-    `${profile.firstName} ${profile.lastName}`.trim() ||
-    user?.name ||
-    "Customer";
+  const fullName = getFullName(profile.firstName, profile.lastName, user?.name);
 
   const initials = getProfileInitials(
     profile.firstName,

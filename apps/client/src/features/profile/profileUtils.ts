@@ -25,3 +25,13 @@ export const getProfileInitials = (
 
   return "CU";
 };
+
+export const getFullName = (
+  firstName?: string,
+  lastName?: string,
+  fallbackName?: string,
+) => {
+  const fullName = `${firstName || ""} ${lastName || ""}`.trim();
+
+  return fullName || fallbackName || "Customer";
+};
