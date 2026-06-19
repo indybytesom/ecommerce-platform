@@ -9,6 +9,8 @@ import {
 } from "@/features/auth/authSelectors";
 import StarRating from "./StarRating";
 import { selectUserReviewForProduct } from "@/features/reviews/reviewsSelectors";
+import { selectProfile } from "@/features/profile/profileSelectors";
+import { getFullName } from "@/features/profile/profileUtils";
 
 type ReviewFormProps = {
   productId: number;
@@ -24,6 +26,8 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const profile = useAppSelector(selectProfile);
+  const fullName = getFullName(profile.firstName, profile.lastName, user?.name);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,7 +53,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
         id: crypto.randomUUID(),
         productId,
         userId: user.id,
-        userName: user.name,
+        userName: fullName,
         rating,
         comment: comment.trim(),
         createdAt: new Date().toISOString(),

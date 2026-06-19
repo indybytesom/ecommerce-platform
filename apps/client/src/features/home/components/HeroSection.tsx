@@ -4,11 +4,9 @@ import Link from "next/link";
 
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import { useAppSelector } from "@/store/hooks";
+// import { useAppSelector } from "@/store/hooks";
 
 export default function HeroSection() {
-  const settings = useAppSelector((state) => state.accountSettings);
-  console.log("settings ::", settings);
 
   return (
     <section className="overflow-hidden bg-gray-50">

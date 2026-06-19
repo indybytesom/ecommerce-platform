@@ -102,7 +102,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           {isAuthenticated && user ? (
             <div className="rounded-2xl border p-4">
               <p className="text-sm text-gray-500">Signed in as</p>
-              {/* <p className="mt-1 font-medium">{user.name}</p> */}
               <p className="mt-1 font-medium">
                 {getFullName(profile.firstName, profile.lastName, user?.name)}
               </p>

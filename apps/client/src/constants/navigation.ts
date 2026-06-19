@@ -44,6 +44,10 @@ export const accountMenuLinks = [
     href: "/profile",
   },
   {
+    label: "Addresses",
+    href: "/addresses",
+  },
+  {
     label: "Settings",
     href: "/settings",
   },

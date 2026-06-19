@@ -6,6 +6,7 @@ import { RecentlyViewedState } from "@/features/recentlyViewed/recentlyViewedTyp
 import { ReviewsState } from "@/features/reviews/reviewsTypes";
 import { ProfileState } from "@/features/profile/profileTypes";
 import { AccountSettingsState } from "@/features/accountSettings/accountSettingsTypes";
+import { AddressesState } from "@/features/addresses/addressesTypes";
 
 const STORAGE_KEYS = {
   CART: "cart",
@@ -16,6 +17,7 @@ const STORAGE_KEYS = {
   REVIEWS: "reviews",
   PROFILE: "profile",
   ACCOUNT_SETTINGS: "accountSettings",
+  ADDRESSES: "addresses",
 };
 
 export const loadState = <T>(key: string): T | undefined => {
@@ -95,3 +97,9 @@ export const loadAccountSettingsState = () =>
 
 export const saveAccountSettingsState = (state: AccountSettingsState) =>
   saveState(STORAGE_KEYS.ACCOUNT_SETTINGS, state);
+
+export const loadAddressesState = () =>
+  loadState<AddressesState>(STORAGE_KEYS.ADDRESSES);
+
+export const saveAddressesState = (state: AddressesState) =>
+  saveState(STORAGE_KEYS.ADDRESSES, state);
