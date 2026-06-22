@@ -9,58 +9,69 @@ import { selectAddresses } from "@/features/addresses/addressesSelectors";
 export default function AddressForm() {
   const dispatch = useAppDispatch();
   const addresses = useAppSelector(selectAddresses);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [addressLine1, setAddressLine1] = useState("");
-  const [addressLine2, setAddressLine2] = useState("");
-  const [city, setCity] = useState("");
-  const [stateName, setStateName] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [country, setCountry] = useState("");
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
+  });
 
   const handleSave = () => {
     if (
-      !firstName.trim() ||
-      !lastName.trim() ||
-      !phone.trim() ||
-      !addressLine1.trim() ||
-      !city.trim() ||
-      !stateName.trim() ||
-      !postalCode.trim() ||
-      !country.trim()
+      !formData.firstName.trim() ||
+      !formData.lastName.trim() ||
+      !formData.phone.trim() ||
+      !formData.addressLine1.trim() ||
+      !formData.city.trim() ||
+      !formData.state.trim() ||
+      !formData.postalCode.trim() ||
+      !formData.country.trim()
     ) {
       toast.error("Please fill all required fields");
       return;
     }
-
     dispatch(
       addAddress({
         id: crypto.randomUUID(),
-        firstName: firstName.trim(),
-        lastName: lastName.trim(),
-        phone: phone.trim(),
-        addressLine1: addressLine1.trim(),
-        addressLine2: addressLine2.trim(),
-        city: city.trim(),
-        state: stateName.trim(),
-        postalCode: postalCode.trim(),
-        country: country.trim(),
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        phone: formData.phone.trim(),
+        addressLine1: formData.addressLine1.trim(),
+        addressLine2: formData.addressLine2.trim(),
+        city: formData.city.trim(),
+        state: formData.state.trim(),
+        postalCode: formData.postalCode.trim(),
+        country: formData.country.trim(),
         isDefault: addresses.length === 0,
       }),
     );
 
     toast.success("Address added successfully");
 
-    setFirstName("");
-    setLastName("");
-    setPhone("");
-    setAddressLine1("");
-    setAddressLine2("");
-    setCity("");
-    setStateName("");
-    setPostalCode("");
-    setCountry("");
+    setFormData({
+      firstName: "",
+      lastName: "",
+      phone: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      state: "",
+      postalCode: "",
+      country: "",
+    });
+  };
+
+  const handleChange = (field: keyof typeof formData, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
   return (
@@ -72,8 +83,8 @@ export default function AddressForm() {
           <label className="mb-2 block text-sm font-medium">First Name</label>
 
           <input
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={formData.firstName}
+            onChange={(e) => handleChange("firstName", e.target.value)}
             className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
           />
         </div>
@@ -82,8 +93,8 @@ export default function AddressForm() {
           <label className="mb-2 block text-sm font-medium">Last Name</label>
 
           <input
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={formData.lastName}
+            onChange={(e) => handleChange("lastName", e.target.value)}
             className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
           />
         </div>
@@ -92,8 +103,8 @@ export default function AddressForm() {
           <label className="mb-2 block text-sm font-medium">Phone Number</label>
 
           <input
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            value={formData.phone}
+            onChange={(e) => handleChange("phone", e.target.value)}
             className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
           />
         </div>
@@ -102,8 +113,8 @@ export default function AddressForm() {
           <label className="mb-2 block text-sm font-medium">Country</label>
 
           <input
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            value={formData.country}
+            onChange={(e) => handleChange("country", e.target.value)}
             className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
           />
         </div>
@@ -113,8 +124,8 @@ export default function AddressForm() {
         <label className="mb-2 block text-sm font-medium">Address Line 1</label>
 
         <input
-          value={addressLine1}
-          onChange={(e) => setAddressLine1(e.target.value)}
+          value={formData.addressLine1}
+          onChange={(e) => handleChange("addressLine1", e.target.value)}
           className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
         />
       </div>
@@ -123,8 +134,8 @@ export default function AddressForm() {
         <label className="mb-2 block text-sm font-medium">Address Line 2</label>
 
         <input
-          value={addressLine2}
-          onChange={(e) => setAddressLine2(e.target.value)}
+          value={formData.addressLine2}
+          onChange={(e) => handleChange("addressLine2", e.target.value)}
           className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
         />
       </div>
@@ -134,8 +145,8 @@ export default function AddressForm() {
           <label className="mb-2 block text-sm font-medium">City</label>
 
           <input
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            value={formData.city}
+            onChange={(e) => handleChange("city", e.target.value)}
             className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
           />
         </div>
@@ -144,8 +155,8 @@ export default function AddressForm() {
           <label className="mb-2 block text-sm font-medium">State</label>
 
           <input
-            value={stateName}
-            onChange={(e) => setStateName(e.target.value)}
+            value={formData.state}
+            onChange={(e) => handleChange("state", e.target.value)}
             className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
           />
         </div>
@@ -154,19 +165,21 @@ export default function AddressForm() {
           <label className="mb-2 block text-sm font-medium">Postal Code</label>
 
           <input
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
+            value={formData.postalCode}
+            onChange={(e) => handleChange("postalCode", e.target.value)}
             className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-black"
           />
         </div>
       </div>
 
-      <button
-        className="mt-8 rounded-full bg-black px-6 py-3 text-white"
-        onClick={handleSave}
-      >
-        Save Address
-      </button>
+      <div className="mt-8 flex gap-3">
+        <button
+          className="rounded-full bg-black px-6 py-3 text-white"
+          onClick={handleSave}
+        >
+          Save Address
+        </button>
+      </div>
     </div>
   );
 }

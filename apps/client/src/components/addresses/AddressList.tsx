@@ -6,8 +6,13 @@ import { useAppDispatch } from "@/store/hooks";
 import { removeAddress } from "@/features/addresses/addressesSlice";
 import { toast } from "sonner";
 import { setDefaultAddress } from "@/features/addresses/addressesSlice";
+import { Address } from "@/features/addresses/addressesTypes";
 
-export default function AddressList() {
+type AddressListProps = {
+  onEdit: (address: Address) => void;
+};
+
+export default function AddressList({ onEdit }: AddressListProps) {
   const dispatch = useAppDispatch();
   const addresses = useAppSelector(selectAddresses);
 
@@ -39,6 +44,7 @@ export default function AddressList() {
           address={address}
           onDelete={handleDelete}
           onSetDefault={handleSetDefault}
+          onEdit={onEdit}
         />
       ))}
     </div>

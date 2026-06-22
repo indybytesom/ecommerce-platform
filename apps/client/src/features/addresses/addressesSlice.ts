@@ -36,10 +36,20 @@ const addressesSlice = createSlice({
         address.isDefault = address.id === action.payload;
       });
     },
+
+    updateAddress: (state, action: PayloadAction<Address>) => {
+      const index = state.addresses.findIndex(
+        (address) => address.id === action.payload.id,
+      );
+
+      if (index !== -1) {
+        state.addresses[index] = action.payload;
+      }
+    },
   },
 });
 
-export const { addAddress, removeAddress, setDefaultAddress } =
+export const { addAddress, removeAddress, setDefaultAddress, updateAddress } =
   addressesSlice.actions;
 
 export default addressesSlice.reducer;

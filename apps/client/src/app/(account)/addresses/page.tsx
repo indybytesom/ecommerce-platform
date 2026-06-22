@@ -1,7 +1,14 @@
+"use client";
+import { useState } from "react";
 import AddressForm from "@/components/addresses/AddressForm";
 import AddressList from "@/components/addresses/AddressList";
+import { Address } from "@/features/addresses/addressesTypes";
+import EditAddressModal from "@/components/addresses/EditAddressModal";
+import { AnimatePresence } from "framer-motion";
 
 export default function AddressesPage() {
+  const [editingAddress, setEditingAddress] = useState<Address | null>(null);
+
   return (
     <div>
       <div className="mb-8">
@@ -11,7 +18,15 @@ export default function AddressesPage() {
       </div>
 
       <AddressForm />
-      <AddressList />
+      <AddressList onEdit={setEditingAddress} />
+      <AnimatePresence>
+        {editingAddress && (
+          <EditAddressModal
+            address={editingAddress}
+            onClose={() => setEditingAddress(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
