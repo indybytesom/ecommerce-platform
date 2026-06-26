@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Product } from "@/types/product";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import FullscreenGallery from "./FullscreenGallery";
 
 type ProductGalleryProps = {

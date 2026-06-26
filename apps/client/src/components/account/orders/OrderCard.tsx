@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Order } from "@/features/orders/orderTypes";
 import Badge from "@/components/ui/Badge";
 import { getStatusVariant } from "@/features/orders/orderUtils";
+import Image from "next/image";
 
 interface OrderCardProps {
   order: Order;
@@ -42,10 +43,12 @@ export default function OrderCard({ order }: OrderCardProps) {
               key={`${item.productId}-${item.size}`}
               className="flex items-center gap-3"
             >
-              <img
+              <Image
                 src={item.image}
                 alt={item.title}
                 className="h-14 w-14 rounded-lg object-cover"
+                width={100}
+                height={100}
               />
 
               <div>

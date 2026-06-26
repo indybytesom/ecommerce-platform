@@ -1,6 +1,6 @@
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
-import brandIcon from "/images/brand/brand-icon.png";
+// import brandIcon from "/images/brand/brand-icon.png";
 
 export default function Logo() {
   return (

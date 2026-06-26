@@ -6,6 +6,7 @@ import {
   getFullName,
   getProfileInitials,
 } from "@/features/profile/profileUtils";
+import Image from "next/image";
 
 export default function ProfileCard() {
   const profile = useAppSelector(selectProfile);
@@ -23,10 +24,12 @@ export default function ProfileCard() {
     <div className="mb-8 rounded-3xl border border-gray-200 bg-white p-6">
       <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
         {profile.avatar ? (
-          <img
+          <Image
             src={profile.avatar}
             alt={fullName}
             className="h-20 w-20 rounded-full object-cover border border-gray-200"
+            width={100}
+            height={100}
           />
         ) : (
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-black text-xl font-bold text-white">

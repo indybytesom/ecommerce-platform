@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useAppSelector } from "@/store/hooks";
 import DashboardStats from "@/components/account/dashboard/DashboardStats";
 import DashboardRecentOrders from "@/components/account/dashboard/DashboardRecentOrders";
 import DashboardRecentReviews from "@/components/account/dashboard/DashboardRecentReviews";

@@ -8,7 +8,7 @@ export const baseApi = createApi({
     baseUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api",
 
     prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.user?.id;
+      const token = (getState() as RootState).auth.accessToken;
 
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);

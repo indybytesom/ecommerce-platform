@@ -1,5 +1,5 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -13,7 +13,7 @@ export default function ShippingForm() {
   const dispatch = useAppDispatch();
   const {
     register,
-    watch,
+    control,
     formState: { errors, isValid },
   } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
@@ -30,7 +30,9 @@ export default function ShippingForm() {
     },
   });
 
-  const formValues = watch();
+  const formValues = useWatch({
+    control,
+  });
 
   useEffect(() => {
     if (isValid) {

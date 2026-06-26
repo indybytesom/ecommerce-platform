@@ -12,6 +12,7 @@ import {
   getFullName,
   getProfileInitials,
 } from "@/features/profile/profileUtils";
+import Image from "next/image";
 
 export default function AccountDropdown() {
   const dispatch = useAppDispatch();
@@ -56,10 +57,12 @@ export default function AccountDropdown() {
         className="flex items-center gap-3 rounded-full border border-gray-200 px-2 py-1.5 transition hover:border-gray-400"
       >
         {profile.avatar ? (
-          <img
+          <Image
             src={profile.avatar}
             alt={fullName}
             className="h-9 w-9 rounded-full border border-gray-200 object-cover"
+            width={100}
+            height={100}
           />
         ) : (
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-xs font-semibold text-white">

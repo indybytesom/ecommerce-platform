@@ -9,4 +9,5 @@ export type AuthState = {
   isAuthenticated: boolean;
   isLoading: boolean;
   isHydrated: boolean;
+  accessToken: string | null;
 };

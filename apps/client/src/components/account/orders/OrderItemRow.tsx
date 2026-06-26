@@ -1,4 +1,5 @@
 import { CartItem } from "@/features/cart/cartTypes";
+import Image from "next/image";
 
 interface OrderItemRowProps {
   item: CartItem;
@@ -7,14 +8,16 @@ interface OrderItemRowProps {
 export default function OrderItemRow({ item }: OrderItemRowProps) {
   return (
     <div className="flex items-center gap-4 border-b py-4">
-      <img
+      <Image
         src={item.image}
         alt={item.title}
         className="h-20 w-20 rounded-xl object-cover"
+        width={100}
+        height={100}
       />
 
       <div className="flex-1">
-        <h3 className="font-medium">{item.title}</h3>
+        <h3 className="font-medium">EEEE {item.title}</h3>
 
         <p className="mt-1 text-sm text-gray-500">Size: {item.size}</p>
 

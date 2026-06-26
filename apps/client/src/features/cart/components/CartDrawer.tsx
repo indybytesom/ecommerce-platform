@@ -4,7 +4,6 @@ import { closeCart } from "../cartSlice";
 import { selectCartIsOpen, selectCartItems } from "../cartSelectors";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import CartItem from "./CartItem";
-import CartSummary from "./CartSummary";
 import Link from "next/link";
 
 export default function CartDrawer() {

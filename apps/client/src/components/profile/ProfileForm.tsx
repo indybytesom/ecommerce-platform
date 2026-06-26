@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { updateProfile } from "@/features/profile/profileSlice";
 import { selectProfile } from "@/features/profile/profileSelectors";
 import { selectUser } from "@/features/auth/authSelectors";
+import Image from "next/image";
 
 export default function ProfileForm() {
   const dispatch = useAppDispatch();
@@ -56,10 +57,12 @@ export default function ProfileForm() {
 
           <div className="flex items-center gap-4">
             {avatar ? (
-              <img
+              <Image
                 src={avatar}
                 alt="Avatar Preview"
                 className="h-20 w-20 rounded-full object-cover border border-gray-200"
+                width={100}
+                height={100}
               />
             ) : (
               <div className="flex h-20 w-20 items-center justify-center rounded-full bg-black text-white font-bold">
