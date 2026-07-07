@@ -1,44 +1,182 @@
+// {
+//   // Visit https://aka.ms/tsconfig to read more about this file
+//   "compilerOptions": {
+//     // File Layout
+//     // "rootDir": "./src",
+//     // "outDir": "./dist",
+
+//     // Environment Settings
+//     // See also https://aka.ms/tsconfig/module
+//     "module": "nodenext",
+//     "target": "esnext",
+//     "types": [],
+//     // For nodejs:
+//     // "lib": ["esnext"],
+//     // "types": ["node"],
+//     // and npm install -D @types/node
+
+//     // Other Outputs
+//     "sourceMap": true,
+//     "declaration": true,
+//     "declarationMap": true,
+
+//     // Stricter Typechecking Options
+//     "noUncheckedIndexedAccess": true,
+//     "exactOptionalPropertyTypes": true,
+
+//     // Style Options
+//     // "noImplicitReturns": true,
+//     // "noImplicitOverride": true,
+//     // "noUnusedLocals": true,
+//     // "noUnusedParameters": true,
+//     // "noFallthroughCasesInSwitch": true,
+//     // "noPropertyAccessFromIndexSignature": true,
+
+//     // Recommended Options
+//     "strict": true,
+//     "jsx": "react-jsx",
+//     "verbatimModuleSyntax": true,
+//     "isolatedModules": true,
+//     "noUncheckedSideEffectImports": true,
+//     "moduleDetection": "force",
+//     "skipLibCheck": true,
+//   }
+// }
+
+
+
+// // New file
+// {
+//   "compilerOptions": {
+//     /* ============================
+//      * Language & Environment
+//      * ============================ */
+//     "target": "ES2022",
+//     "module": "NodeNext",
+//     "moduleResolution": "NodeNext",
+//     "lib": ["ES2022"],
+//     "types": ["node"],
+
+//     /* ============================
+//      * Project Structure
+//      * ============================ */
+//     "rootDir": "./src",
+//     "outDir": "./dist",
+//     // "baseUrl": "./src",
+
+//     /* ============================
+//      * Path Aliases
+//      * ============================ */
+//     "paths": {
+//       "@config/*": ["config/*"],
+//       "@constants/*": ["constants/*"],
+//       "@errors/*": ["errors/*"],
+//       "@interfaces/*": ["interfaces/*"],
+//       "@lib/*": ["lib/*"],
+//       "@middlewares/*": ["middlewares/*"],
+//       "@modules/*": ["modules/*"],
+//       "@prisma/*": ["prisma/*"],
+//       "@routes/*": ["routes/*"],
+//       "@shared/*": ["shared/*"],
+//       "@types/*": ["types/*"],
+//       "@utils/*": ["utils/*"]
+//     },
+
+//     /* ============================
+//      * Module Interoperability
+//      * ============================ */
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "resolveJsonModule": true,
+
+//     /* ============================
+//      * Output
+//      * ============================ */
+//     "sourceMap": true,
+//     "removeComments": false,
+//     "incremental": true,
+
+//     /* ============================
+//      * Type Checking
+//      * ============================ */
+//     "strict": true,
+//     "noUncheckedIndexedAccess": true,
+//     "exactOptionalPropertyTypes": true,
+//     "skipLibCheck": true,
+//     "forceConsistentCasingInFileNames": true,
+
+//     /* ============================
+//      * Modern TypeScript
+//      * ============================ */
+//     "verbatimModuleSyntax": true,
+//     "isolatedModules": true,
+//     "moduleDetection": "force"
+//   },
+
+//   "include": ["src/**/*"],
+
+//   "exclude": ["node_modules", "dist"]
+// }
+
+
+
+
+
+
+
+
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    /* ============================
+     * Language & Runtime
+     * ============================ */
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2023"],
+    "types": ["node"],
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
+    /* ============================
+     * Project Structure
+     * ============================ */
+    "rootDir": "./src",
+    "outDir": "./dist",
 
-    // Other Outputs
+    /* ============================
+     * Module Interoperability
+     * ============================ */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    /* ============================
+     * Build Output
+     * ============================ */
     "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    "incremental": true,
+    "removeComments": false,
 
-    // Stricter Typechecking Options
+    /* ============================
+     * Type Safety
+     * ============================ */
+    "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
 
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
-    "strict": true,
-    "jsx": "react-jsx",
+    /* ============================
+     * Modern TypeScript
+     * ============================ */
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+    "moduleDetection": "force"
+  },
+
+  "include": ["src/**/*"],
+
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
